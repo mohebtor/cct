@@ -1,14 +1,17 @@
+require('dotenv').config()
 const express = require('express')
 const nodemailer = require('nodemailer');
+const http = require('http')
 const app = express()
 app.set('view engine', 'ejs');
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-const port = 3000
+
+const port = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
-  res.render('index.ejs')
+  res.render('index')
 })
 
 
@@ -70,5 +73,5 @@ app.post("/contact", (req, res)=>{
 
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`server started on port:${port}`)
 })
